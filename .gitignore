@@ -1,4 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
+.idea/
 node_modules/
 .DS_Store
 .idea/dbnavigator.xml
@@ -6,3 +7,5 @@ node_modules/
 .idea/server-api-js.iml
 .idea/workspace.xml
 
+www/app.bundle.js
+www/app.bundle.js.map

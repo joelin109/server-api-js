@@ -4,14 +4,13 @@
 "use strict";
 
 let pg = require('pg'),
-    config = require('./../conf/sql'),
-    databaseURL = config.databaseURL;
+    conf = require('./_conf'),
+    databaseURL = conf.databaseURL;
 
 
 function limitSize(pageSize, pageNum) {
 
-    let _limit = "LIMIT " + pageSize + " OFFSET " + ((pageNum - 1) * pageSize);
-    return _limit
+    return "LIMIT " + pageSize + " OFFSET " + ((pageNum - 1) * pageSize);
 };
 
 function queryLimit(sql, values, pageSize, pageNum, singleItem, dontLog) {
@@ -33,7 +32,7 @@ function query(sql, values, singleItem, dontLog) {
         pg.connect(databaseURL, function (err, conn, done) {
             if (err) return reject(err);
             try {
-                conn.query(sql, values, function (err, result) {
+                conn.query(sql, values ? [] : values, function (err, result) {
                     done();
                     if (err) {
                         reject(err);
