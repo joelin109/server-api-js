@@ -1,2 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 node_modules/
+.DS_Store
+.idea/dbnavigator.xml
+.idea/modules.xml
+.idea/server-api-js.iml
+.idea/workspace.xml
+
