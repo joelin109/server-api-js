@@ -5,7 +5,7 @@
 
 let pg = require('pg'),
     conf = require('./_conf'),
-    databaseURL = conf.databaseURL;
+    databaseURL = conf.DB_Conn_URI;
 
 
 function limitSize(pageSize, pageNum) {
