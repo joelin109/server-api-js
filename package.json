@@ -16,7 +16,8 @@
     "connect-redis": "^3.3.2",
     "morgan": "~1.9.0",
     "body-parser": "~1.18.2",
-    "cookie-parser": "~1.4.3"
+    "cookie-parser": "~1.4.3",
+    "mocha": "~4.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
