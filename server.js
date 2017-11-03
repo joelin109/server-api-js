@@ -1,14 +1,10 @@
 "use strict";
 
 let express = require('express'),
-    compression = require('compression'),
     api = require('./src/service/api_register'),
     app = express();
 
-app.set('port', process.env.PORT || 5012);
-
-app.use(compression());
-
+app.set('port', process.env.PORT || 5002);
 app.use('/', express.static(__dirname + '/www'));
 
 // Adding CORS support

@@ -3,17 +3,20 @@
  */
 let reqUtil = require('../util/HttpRequestUtil');
 let resUtil = require('../util/HttpResponseUtil');
+let al = require('../logic/article_logic');
 
-let articleAction = {
+let ArticleAction = {
 
     /**
      * APP 首页，包括顶部轮播图、课程目录
      */
     getArticleList: function (req, res) {
 
+        al.ArticleLogic.getArticleList()
+
     }
 };
 
 
 
-exports.articleAction = articleAction;
+exports.ArticleAction = ArticleAction;
