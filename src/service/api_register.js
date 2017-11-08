@@ -3,8 +3,8 @@
  */
 
 let conf = require('./_conf'),
-    word = require('./word'),
-    article = require('./article');
+    word = require('./action/word'),
+    article = require('./action/article');
 
 function register(app) {
 

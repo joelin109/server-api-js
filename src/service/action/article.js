@@ -1,8 +1,8 @@
 /**
  * Created by joe on 2/21/17.
  */
-let conn = require('./_conn');
-let u = require('./_util');
+let conn = require('./../_conn');
+let u = require('./../_util');
 
 
 let findList = (req, res, next) => {

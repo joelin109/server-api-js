@@ -2,7 +2,9 @@ module.exports = SessionUtil = {
 
     load:function(req){ //加载session
         var session = req.session;
+        console.log('a')
         session.lastVisitAt=new Date();
+        console.log('b')
         session.lastVisitUrl=req.url+(req.url.query?('?'+req.url.query):'');
         session.count = session.count || 0;
         session.count++;

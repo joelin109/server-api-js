@@ -10,9 +10,22 @@ let ArticleAction = {
     /**
      * APP 首页，包括顶部轮播图、课程目录
      */
-    getArticleList: function (req, res) {
+    doArticleList: function (req, res) {
 
-        al.ArticleLogic.getArticleList()
+        var param = reqUtil.commonRequest(req);
+        console.log(param.token);
+        console.log(param.sitecode);
+        console.log(param.appver);
+        console.log(param.data);
+        console.log(param.ip);
+        console.log(param.session_ip);
+        console.log(param.host);
+        console.log('');
+
+
+        //al.ArticleLogic.getArticleList()
+
+        resUtil.commonJson(res, param.data);
 
     }
 };

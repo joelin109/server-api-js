@@ -1,5 +1,6 @@
 let crypto = require('crypto');
 let moment = require('moment');
+let Config_server_hostKey = 'd01'
 
 let StringUtil  = {
 
@@ -36,9 +37,6 @@ let StringUtil  = {
             a += b.charAt(Math.floor(Math.random() * c));
         }
         return a;
-    },
-    getId: function() { //获取ID
-        return Config.server.hostKey+new Date().getTime()+this.getRandString(10);
     },
     isInt: function (s) { //判断是否为数字
         if (!s || s.length == 0) return false;
@@ -304,7 +302,7 @@ let StringUtil  = {
     },
     toHex:function(txt){ // to hex
         var s="";
-        if(!StringUtil.isEmpty(txt)){
+        if(!this.isEmpty(txt)){
             for(var i = 0; i < txt.length; i++){
                 s += txt.charCodeAt(i).toString(16);
             }
@@ -493,6 +491,15 @@ let StringUtil  = {
         result = int_result + '.' + decimal;
         return result;
     },
+    getOrderId:function () {
+        return moment().format('YYYYMMDDHHmm') + this.getRandString(5);
+    },
+    toNumberFix:function (str) {
+        if(isNaN(str)){
+            return '0.00'
+        }
+        return Number(str).toFixed(2);
+    },
     checkSign:function (obj, key, sign) {
         var md5 = function(str){//获取参数
             var sign = crypto.createHash('md5').update(str, 'utf8').digest("hex").toUpperCase();
@@ -519,15 +526,11 @@ let StringUtil  = {
         return md5(combo(obj,key)) === sign
 
     },
-    getOrderId:function () {
-        return moment().format('YYYYMMDDHHmm') + StringUtil.getRandString(5);
-    },
-    toNumberFix:function (str) {
-        if(isNaN(str)){
-            return '0.00'
-        }
-        return Number(str).toFixed(2);
+    getId: function() { //获取ID
+        return Config_server_hostKey+new Date().getTime()+this.getRandString(10);
     },
 };
 
 module.exports = StringUtil;
+
+/*checkSign*/

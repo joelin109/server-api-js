@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "path": "^0.12.7",
-    "pg": "^7.3.0",
+    "pg": "^7.4.0",
     "mysql": "^2.15.0",
     "express": "^4.16.2",
     "express-session": "^1.15.6",

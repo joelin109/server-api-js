@@ -8,6 +8,8 @@ let content = require('../action/content_action');
 
 router.post(config.APIURL_Content_Article_List, function (req, res) {
 
-    content.ArticleAction.getArticleList(req, res)
+    content.ArticleAction.doArticleList(req, res)
 
 });
+
+module.exports = router;
