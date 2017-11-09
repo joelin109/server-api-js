@@ -1,10 +1,25 @@
 "use strict";
+let express = require('express');
+let session = require('express-session');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
 
-let express = require('express'),
-    api = require('./src/service/api_register'),
-    app = express();
+let router = require('./src/service/route/index');
+let app = express();
+let Config = require('./config');
+app.set('port', process.env.PORT || 5003);
 
-app.set('port', process.env.PORT || 5002);
+app.use(session({
+    //store: new RedisStore(Config.redis),
+    key: Config.session.key,
+    secret: Config.session.secret,
+    cookie: Config.session.cookie,
+    resave: Config.session.resave,
+    saveUninitialized: Config.session.saveUninitialized
+}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
+app.use(cookieParser());
 app.use('/', express.static(__dirname + '/www'));
 
 // Adding CORS support
@@ -15,14 +30,17 @@ app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Headers", req.header('access-control-request-headers'));
 
     if (req.method === 'OPTIONS') {
-        // CORS Preflight
         res.send();
     } else {
         next();
     }
 });
 
-api.register(app)
+//let api = require('./src/service/api_register');
+//api.register(app)
+
+app.use('/', router);
 app.listen(app.get('port'), function () {
+
     console.log('Express server listening on port ' + app.get('port'));
 });

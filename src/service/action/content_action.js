@@ -17,9 +17,9 @@ let ArticleAction = {
         console.log(param.sitecode);
         console.log(param.appver);
         console.log(param.data);
-        console.log(param.ip);
-        console.log(param.session_ip);
-        console.log(param.host);
+        console.log(param.req_ip);
+        console.log(param.req_session_id);
+        console.log(param.req_host);
         console.log('');
 
 

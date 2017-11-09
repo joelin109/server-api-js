@@ -13,13 +13,12 @@ exports.commonRequest = function (req) {
         locale: StringUtil.getParam(req, 'locale', ''),
         appver: StringUtil.getParam(req, 'appver', ''),
         data: StringUtil.getParam(req, 'data'),
-        ip: SessionUtil.getIp(req),
-        session_id: SessionUtil.getSessionId(req),
-        user_agent: SessionUtil.getUserAgent(req),
-        host: "http://" + req.headers.host
+        req_ip: SessionUtil.getIp(req),
+        req_session_id: SessionUtil.getSessionId(req),
+        req_user_agent: SessionUtil.getUserAgent(req),
+        req_host: "http://" + req.headers.host
     }
 
-    SessionUtil.load(req);
     return request;
 
 };
