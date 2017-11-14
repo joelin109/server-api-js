@@ -10,9 +10,9 @@ let ArticleLogic = {
         console.log(StringUtil.getOrderId());
 
         let result = {
-            "code": "1",
-            "orderID": StringUtil.getOrderId() || "",
-            "sessionID": param.req_session_id || ""
+            code: "1",
+            orderID: StringUtil.getOrderId() || "",
+            sessionID: param.req_session_id || ""
         };
 
         callback(null, result);
@@ -38,9 +38,9 @@ let ArticleLogic = {
         console.log(StringUtil.getOrderId());
 
         let result = {
-            "code": "2",
-            "orderID": StringUtil.getOrderId() || "",
-            "sessionID": param.req_session_id || ""
+            code: "2",
+            orderID: StringUtil.getOrderId() || "",
+            sessionID: param.req_session_id || ""
         };
 
         return result;
@@ -48,11 +48,17 @@ let ArticleLogic = {
     getArticleList4: function (param) {
 
         console.log(StringUtil.getOrderId());
+        var roadPoem = `Then took the other, as just as fair,
+        And having perhaps the better claim
+        Because it was grassy and wanted wear,
+        Though as for that the passing there
+        Had worn them really about the same,`;
+
 
         let result = {
-            "code": "0",
-            "orderID": StringUtil.getOrderId() || "",
-            "sessionID": param.sessionID || ""
+            code: roadPoem,
+            orderID: StringUtil.getOrderId() || "",
+            sessionID: param.sessionID || ""
         };
 
         return null, result;

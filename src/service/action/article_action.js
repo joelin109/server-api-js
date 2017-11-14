@@ -43,5 +43,3 @@ module.exports = ArticleAction = {
 
     }
 }
-
-//exports.ArticleAction = ArticleAction;
