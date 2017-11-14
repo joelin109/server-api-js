@@ -7,7 +7,8 @@ let bodyParser = require('body-parser');
 let router = require('./src/service/route/index');
 let app = express();
 let Config = require('./config');
-app.set('port', process.env.PORT || 5003);
+let app_port = process.env.PORT || 5003;
+
 
 app.use(session({
     //store: new RedisStore(Config.redis),
@@ -22,7 +23,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
 app.use(cookieParser());
 app.use('/', express.static(__dirname + '/www'));
 
-// Adding CORS support
+/* Adding CORS support */
 app.all('*', function (req, res, next) {
     // Set CORS headers: allow all origins, methods, and headers: you may want to lock this down in a production environment
     res.header("Access-Control-Allow-Origin", "*");
@@ -40,7 +41,8 @@ app.all('*', function (req, res, next) {
 //api.register(app)
 
 app.use('/', router);
-app.listen(app.get('port'), function () {
+app.set('port', app_port);
+app.listen(app_port, function () {
 
-    console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server listening on port ' + app_port);
 });
