@@ -44,4 +44,4 @@ module.exports = ArticleAction = {
     }
 }
 
-//exports.doAsyncAwait = doAsyncAwait;
+//exports.ArticleAction = ArticleAction;
