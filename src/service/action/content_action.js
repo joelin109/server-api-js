@@ -11,9 +11,9 @@ let WordAction = {
         var rs = {data: []}
 
         async.auto({
-            getUser: function (callback) {
+            getUser(callback) {
                 console.log('getUser');
-                return callback(null,8)
+                return callback(null,81)
             },
             getOrderID: function (callback) {
                 console.log('getOrderID');

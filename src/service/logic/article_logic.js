@@ -18,10 +18,10 @@ let ArticleLogic = {
         callback(null, result);
     },
 
-    getArticleList2: function (err, param) {
+    getArticleList2: function (param) {
 
         console.log(StringUtil.getOrderId());
-        err = 1;
+
 
         let result = {
             //error: 1,
@@ -30,7 +30,7 @@ let ArticleLogic = {
             sessionID: param.req_session_id || ""
         };
 
-        return err, result;
+        return {err:null, result:result};
     },
 
     getArticleList3: function (param) {

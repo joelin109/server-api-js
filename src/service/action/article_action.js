@@ -15,24 +15,23 @@ module.exports = ArticleAction = {
         console.log('');
 
         //let _filter = param.data.filter;
-        const err = null;
-        const result2 = await ArticleLogic.getArticleList2(err, param)
+        const {err, result} = await ArticleLogic.getArticleList2(param)
         if (err) {
-            resUtil.commonJson(res, result2);
+            resUtil.commonJson(res, result);
             return
         }
 
         const result3 = await ArticleLogic.getArticleList3(param)
-        const result4 = await ArticleLogic.getArticleList4(result2)
+        const result4 = await ArticleLogic.getArticleList4(result3)
 
-        let result = {
-            token: result2,
+        let responseResult = {
+            token: result,
             sitecode: result3,
             result4: result4
         }
 
-        console.log(result);
-        resUtil.commonJson(res, result);
+        console.log(responseResult);
+        resUtil.commonJson(res, responseResult);
 
     },
 
