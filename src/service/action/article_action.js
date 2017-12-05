@@ -7,31 +7,37 @@ let ArticleLogic = require('../logic/article_logic');
 
 module.exports = ArticleAction = {
 
-    asyncArticleList: async function(req, res) {
+    //const asyncArticleList = async(req, res) => {
+    async asyncArticleList(req, res) {
+
         var param = reqUtil.commonRequest(req);
         console.log(param.req_ip);
         console.log(param.req_session_id);
         console.log(param.req_host);
         console.log('');
 
-        //let _filter = param.data.filter;
-        const {err, result} = await ArticleLogic.getArticleList2(param)
-        if (err) {
-            resUtil.commonJson(res, result);
+        try {
+
+            //let _filter = param.data.filter;
+            const result = await ArticleLogic.getArticleListPro(param)
+            const result4 = await ArticleLogic.getArticleList(result)
+
+            let responseResult = {
+                token: result,
+                result4: result4
+            }
+
+            console.log("successful");
+            console.log(responseResult);
+            resUtil.commonJson(res, responseResult);
+
+        } catch (err) {
+
+            console.log("Failure");
+            console.log(err); // 这里捕捉到错误 `error`
+            resUtil.commonJson(res, err);
             return
         }
-
-        const result3 = await ArticleLogic.getArticleList3(param)
-        const result4 = await ArticleLogic.getArticleList4(result3)
-
-        let responseResult = {
-            token: result,
-            sitecode: result3,
-            result4: result4
-        }
-
-        console.log(responseResult);
-        resUtil.commonJson(res, responseResult);
 
     },
 
