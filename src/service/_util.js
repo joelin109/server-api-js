@@ -2,6 +2,9 @@
  * Created by joe on 2/21/17.
  */
 
+function sleepTime(t) {
+    return new Promise((resolve) => setTimeout(resolve, t));
+};
 
 function responseFormat(pageSize, pageNum, results) {
 
@@ -22,3 +25,4 @@ function responseFormatError(error) {
 exports.resFormat = responseFormat
 exports.resFormatDt = responseFormatDetail
 exports.resFormatErr = responseFormatError
+exports.sleepTime = sleepTime

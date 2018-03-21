@@ -1,10 +1,12 @@
+"use strict"
 /**
  * Created by joe on 11/3/17.
  */
 //let coroutine = require("coroutine");
 let StringUtil = require('../util/util.framework.string');
 
-let ArticleLogic = {
+
+const ArticleLogic = {
 
     getArticleList: function (param) {
 
@@ -23,41 +25,6 @@ let ArticleLogic = {
         };
 
         return result;
-
-    },
-
-    getArticleList2: function (param) {
-
-        console.log(StringUtil.getOrderId());
-
-
-        let result = {
-            //error: 1,
-            code: "1",
-            orderID: StringUtil.getOrderId() || "",
-            sessionID: param.req_session_id || ""
-        };
-        let err = null
-
-        return {err, result};
-    },
-
-
-    getArticleListCB: function (param, callback) {
-
-        console.log(StringUtil.getOrderId());
-
-        let result = {
-            code: "7",
-            orderID: StringUtil.getOrderId() || "",
-            sessionID: param.req_session_id || ""
-        };
-        return {err, result};
-
-        //coroutine.sleep(2000);
-        //callback(result);
-
-
     },
 
     getArticleListPro: function (param) {
@@ -90,6 +57,71 @@ let ArticleLogic = {
 
         });
 
+
+    },
+
+
+    _getArticleListCB: function (param, callback) {
+
+        console.log(StringUtil.getOrderId());
+
+        let result = {
+            code: "7",
+            orderID: StringUtil.getOrderId() || "",
+            sessionID: param.req_session_id || ""
+        };
+        return {error, result};
+
+        //coroutine.sleep(2000);
+        //callback(result);
+
+    },
+
+    _getArticleFavoriteList: (param) => {
+
+        console.log(StringUtil.getOrderId());
+
+
+        let result = {
+            code: "1",
+            orderID: StringUtil.getOrderId() || "",
+            sessionID: param.req_session_id || ""
+        };
+        let err = null
+
+        return {err, result};
+    },
+
+    getArticleDetail: async function (param) {
+        try {
+
+            console.log("this");
+            console.log(this);
+
+            const {error, result} = await this._getArticleFavoriteList(param)
+            const _listP = await this.getArticleListPro(param)
+            //return this.getArticleListPro(param)
+
+            let _result = {
+                id: StringUtil.getOrderId() || "",
+                sessionID: param.sessionID || "",
+                result,
+                _listP
+            };
+
+            return _result;
+
+
+        } catch (err) {
+
+            console.log("Failure");
+            console.log(err); // 这里捕捉到错误 `error`
+            return {
+                id: StringUtil.getOrderId() || "",
+                err: err
+            };
+
+        }
 
     }
 

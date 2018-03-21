@@ -7,24 +7,24 @@ let ArticleLogic = require('../logic/article_logic');
 
 module.exports = ArticleAction = {
 
-    //const asyncArticleList = async(req, res) => {
-    async asyncArticleList(req, res) {
+    //async asyncArticleList(req, res) {
+    asyncArticleList: async function (req, res) {
 
         var param = reqUtil.commonRequest(req);
         console.log(param.req_ip);
         console.log(param.req_session_id);
         console.log(param.req_host);
-        console.log('');
 
         try {
 
             //let _filter = param.data.filter;
-            const result = await ArticleLogic.getArticleListPro(param)
-            const result4 = await ArticleLogic.getArticleList(result)
+            const result = await ArticleLogic.getArticleList(param)
+            const resultP = await ArticleLogic.getArticleListPro(result)
 
             let responseResult = {
-                token: result,
-                result4: result4
+                token: param.req_session_id,
+                result: result,
+                resultP
             }
 
             console.log("successful");
@@ -41,10 +41,30 @@ module.exports = ArticleAction = {
 
     },
 
-    asyncArticleDetail: async function(req, res) {
+
+    asyncArticleDetail: async (req, res) => {
         let param = reqUtil.commonRequest(req);
 
-        resUtil.commonJson(res, param);
+        try {
+
+            //let _filter = param.data.filter;
+            const result = await ArticleLogic.getArticleDetail(param)
+
+            let responseDetailResult = {
+                detail: result,
+            }
+
+            console.log("successful");
+            console.log(responseDetailResult);
+            resUtil.commonJson(res, responseDetailResult);
+
+        } catch (err) {
+
+            console.log("Failure");
+            console.log(err); // 这里捕捉到错误 `error`
+            resUtil.commonJson(res, err);
+            return
+        }
 
     }
 }
