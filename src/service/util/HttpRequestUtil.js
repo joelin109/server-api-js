@@ -1,8 +1,8 @@
 /**
  * Created by joe on 11/3/17.
  */
-let StringUtil = require('./util.framework.string');
-let SessionUtil = require('./util.framework.session');
+let StringUtil = require('./util.fw.string');
+let SessionUtil = require('./util.fw.session');
 
 exports.commonRequest = function (req) {
 

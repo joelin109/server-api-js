@@ -3,7 +3,7 @@
  * Created by joe on 11/3/17.
  */
 //let coroutine = require("coroutine");
-let StringUtil = require('../util/util.framework.string');
+let StringUtil = require('../util/util.fw.string');
 
 
 const ArticleLogic = {
