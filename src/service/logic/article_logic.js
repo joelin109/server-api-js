@@ -61,7 +61,8 @@ const ArticleLogic = {
     },
 
 
-    _getArticleListCB: function (param, callback) {
+    // execute
+    _execute: function (param) {
 
         console.log(StringUtil.getOrderId());
 
@@ -70,10 +71,32 @@ const ArticleLogic = {
             orderID: StringUtil.getOrderId() || "",
             sessionID: param.req_session_id || ""
         };
-        return {error, result};
 
-        //coroutine.sleep(2000);
-        //callback(result);
+        return result;
+
+    },
+
+    _execCB: function (param, callback) {
+
+        callback(this._execute(param));
+    },
+
+    _getArticleListCB: function (param) {
+
+        console.log("arguments.callee");
+
+        this._execCB(param, (result) => {
+
+            if (result.error) {
+                console.log('MsgLogDao create', result.error);
+                return {
+                    error: result.error
+                }
+
+                return {result};
+
+            }
+        });
 
     },
 
@@ -100,13 +123,15 @@ const ArticleLogic = {
 
             const {error, result} = await this._getArticleFavoriteList(param)
             const _listP = await this.getArticleListPro(param)
-            //return this.getArticleListPro(param)
+            //const _list = await this._getArticleListCB(param)
+            const _list = this._execute(param)
 
             let _result = {
                 id: StringUtil.getOrderId() || "",
                 sessionID: param.sessionID || "",
                 result,
-                _listP
+                _listP,
+                _list
             };
 
             return _result;
@@ -124,7 +149,6 @@ const ArticleLogic = {
         }
 
     }
-
 
 
 }
