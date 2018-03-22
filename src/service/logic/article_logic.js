@@ -29,7 +29,13 @@ const ArticleLogic = {
 
     getArticleListPro: function (param) {
 
-        return new Promise(function (resolve, reject) {
+        return this._executeP(param)
+            .then(
+                result => ({articleListPro:result})
+            )
+
+
+/*        return new Promise(function (resolve, reject) {
 
             let orderID = StringUtil.getOrderId();
             let err = 'fff'
@@ -55,7 +61,7 @@ const ArticleLogic = {
                 reject({err, result});
             }
 
-        });
+        });*/
 
 
     },
@@ -73,6 +79,33 @@ const ArticleLogic = {
         };
 
         return result;
+
+    },
+
+    _executeP: function (param) {
+
+        const self = this
+
+        return new Promise(function (resolve, reject) {
+
+            let orderID = StringUtil.getOrderId();
+
+            if(orderID){
+
+                const  result = self._execute(param)
+                resolve(result);
+
+            }
+            else {
+
+                let result = {
+                    code: "error",
+                    orderID:  "_executeP"
+                };
+                reject({err, result});
+            }
+
+        });
 
     },
 
