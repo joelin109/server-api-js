@@ -2,7 +2,7 @@ let crypto = require('crypto');
 let moment = require('moment');
 let Config_server_hostKey = 'd01'
 
-let StringUtil  = {
+module.exports = StringUtil = {
 
     YYYYMMddHHMMSS : 'YYYY-MM-DD HH:mm:ss',
     trim: function (s) {  //删除左右空格
@@ -531,6 +531,7 @@ let StringUtil  = {
     },
 };
 
-module.exports = StringUtil;
+//module.exports = StringUtil;
+
 
 /*checkSign*/

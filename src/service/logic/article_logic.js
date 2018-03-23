@@ -3,7 +3,8 @@
  * Created by joe on 11/3/17.
  */
 //let coroutine = require("coroutine");
-let StringUtil = require('../util/util.fw.string');
+const StringUtil = require('../util/util.fw.string');
+require('../util/util.fw.dao');
 
 
 const ArticleLogic = {
@@ -29,89 +30,11 @@ const ArticleLogic = {
 
     getArticleListPro: function (param) {
 
-        return this._executeP(param)
+        return Conn.query(param)
             .then(
                 result => ({articleListPro:result})
             )
 
-
-/*        return new Promise(function (resolve, reject) {
-
-            let orderID = StringUtil.getOrderId();
-            let err = 'fff'
-
-            if(orderID){
-                console.log(orderID);
-
-                let result = {
-                    code: "getArticleList5",
-                    orderID: orderID || "",
-                    sessionID:param.req_session_id
-                };
-
-                resolve(result);
-
-            }
-            else {
-
-                let result = {
-                    code: "error",
-                    orderID:  "rggfd"
-                };
-                reject({err, result});
-            }
-
-        });*/
-
-
-    },
-
-
-    // execute
-    _execute: function (param) {
-
-        console.log(StringUtil.getOrderId());
-
-        let result = {
-            code: "7",
-            orderID: StringUtil.getOrderId() || "",
-            sessionID: param.req_session_id || ""
-        };
-
-        return result;
-
-    },
-
-    _executeP: function (param) {
-
-        const self = this
-
-        return new Promise(function (resolve, reject) {
-
-            let orderID = StringUtil.getOrderId();
-
-            if(orderID){
-
-                const  result = self._execute(param)
-                resolve(result);
-
-            }
-            else {
-
-                let result = {
-                    code: "error",
-                    orderID:  "_executeP"
-                };
-                reject({err, result});
-            }
-
-        });
-
-    },
-
-    _execCB: function (param, callback) {
-
-        callback(this._execute(param));
     },
 
     _getArticleListCB: function (param) {
@@ -153,11 +76,13 @@ const ArticleLogic = {
 
             console.log("this");
             console.log(this);
+            const sql = 'select count(id) count from t_sms'
 
             const {error, result} = await this._getArticleFavoriteList(param)
             const _listP = await this.getArticleListPro(param)
             //const _list = await this._getArticleListCB(param)
-            const _list = this._execute(param)
+            const _list = await Conn.query({sql})
+            const _test = "dsfsdfdsfAAAAAA"
 
             let _result = {
                 id: StringUtil.getOrderId() || "",
